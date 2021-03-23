@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --poll src/index.ts"
+    "start": "ts-node-dev --poll src/index.ts",
+    "pub": "git add . && git status && git commit -m \"Updates\" &&  git push"
   },
   "keywords": [],
   "author": "",

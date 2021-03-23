@@ -11,9 +11,10 @@ import { signupRouter } from './routes/signup';
 import { errorHandler } from './middlewares/error-handler';
 import { NotFoundError } from './errors/not-found-error';
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT;
 // var server_host = process.env.YOUR_HOST || '0.0.0.0';
 const host = '0.0.0.0';
+// const host = 'localhost';
 
 const app = express();
 app.set('trust proxy', true);
@@ -63,7 +64,7 @@ const start = async () => {
   }
 
   app.listen( port as any, host, () => {
-    console.log('auth listening on port '+port);
+    console.log('auth listening on port '+ port);
   });
 };
 

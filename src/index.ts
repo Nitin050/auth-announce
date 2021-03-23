@@ -62,7 +62,7 @@ const start = async () => {
     console.error(err);
   }
 
-  app.listen( port, host, () => {
+  app.listen( port as any, host, () => {
     console.log('auth listening on port '+port);
   });
 };

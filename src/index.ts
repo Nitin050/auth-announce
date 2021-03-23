@@ -12,6 +12,8 @@ import { errorHandler } from './middlewares/error-handler';
 import { NotFoundError } from './errors/not-found-error';
 
 const port = process.env.PORT || 5000
+// var server_host = process.env.YOUR_HOST || '0.0.0.0';
+const host = '0.0.0.0';
 
 const app = express();
 app.set('trust proxy', true);
@@ -60,7 +62,7 @@ const start = async () => {
     console.error(err);
   }
 
-  app.listen(port, () => {
+  app.listen( port, host, () => {
     console.log('auth listening on port '+port);
   });
 };

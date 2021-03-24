@@ -36,6 +36,7 @@ app.use(json());
 app.use(
   cookieSession({
     signed: false,
+    sameSite: 'none'
     // secure: true
   })
 );

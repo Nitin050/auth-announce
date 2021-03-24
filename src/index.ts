@@ -25,7 +25,7 @@ const app = express();
 app.set('trust proxy', true);
 
 var corsOptions = {
-  origin: ['https://ann05.vercel.app', 'http://localhost:3000'],
+  origin: 'https://ann05.vercel.app',
   optionsSuccessStatus: 200,
   credentials: true,
   exposedHeaders: ["set-cookie"],

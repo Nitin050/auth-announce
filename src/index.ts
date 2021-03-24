@@ -29,6 +29,7 @@ var corsOptions = {
   optionsSuccessStatus: 200,
   credentials: true,
   exposedHeaders: ["set-cookie"],
+  'Access-Control-Allow-Origin': '*',
 }
 app.use(cors(corsOptions));
 

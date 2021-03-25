@@ -15,11 +15,13 @@ import { NotFoundError } from './errors/not-found-error';
 const port = process.env.PORT;
 const host = '0.0.0.0';
 const mongoURL = "mongodb+srv://1234:1234@cluster-announce.qotos.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const secure = true;
 
 // development
 // const port = 5000;
 // const host = 'localhost';
 // const mongoURL = 'mongodb://localhost:27017/auth';
+// const secure = false;
 
 const app = express();
 app.set('trust proxy', true);
@@ -37,7 +39,7 @@ app.use(
   cookieSession({
     signed: false,
     sameSite: 'none',
-    secure: true
+    secure: secure
   })
 );
 

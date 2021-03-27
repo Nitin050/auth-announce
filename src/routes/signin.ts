@@ -49,6 +49,7 @@ router.post('/api/users/signin',
     req.session = {
       jwt: userJwt
     };
+    res.setHeader('Access-Control-Allow-Headers', 'Set-Cookie')
     res.status(200).send(existingUser);
   }
 );

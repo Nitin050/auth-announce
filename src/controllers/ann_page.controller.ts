@@ -57,6 +57,34 @@ exports.findAll = (req:any, res:any) => {
 };
 
 
+// return all public ann_pages
+exports.findAllPublic = (req:any, res:any) => {
+    AnnouncementPage.find({visibility: 'public'})
+    .sort({createdAt: -1})
+    .then((ann_pages: any) => {
+        res.send(ann_pages);
+    }).catch((err: any) => {
+        res.status(500).send({
+            errors: [{ message:  err.message || "some error while retrieving all ann_pages"}]
+        })
+    })
+};
+
+
+// return all subscribed ann_pages
+exports.findAllSubscribed = (req:any, res:any) => {
+    AnnouncementPage.find({subscribers:  req.currentUser!.email})
+    .sort({createdAt: -1})
+    .then((ann_pages: any) => {
+        res.send(ann_pages);
+    }).catch((err: any) => {
+        res.status(500).send({
+            errors: [{ message:  err.message || "some error while retrieving all ann_pages"}]
+        })
+    })
+};
+
+
 // find a single ann_page by url
 exports.findOne = async(req:any, res:any) => {
     

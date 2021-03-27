@@ -72,9 +72,11 @@ app.delete('/drafts/:draftId', requireAuth, (drafts as any).delete);
 
 app.post('/ann_pages', requireAuth, (ann_pages as any).create);
 app.post('/ann_pages/findAll', requireAuth, (ann_pages as any).findAll);
+app.post('/ann_pages/findAllPublic', (ann_pages as any).findAllPublic);
+app.post('/ann_pages/findAllSubscribed',requireAuth, (ann_pages as any).findAllSubscribed);
 app.post('/ann_pages/:url', (ann_pages as any).findOne);
-app.post('/ann_pages/subscribe/:ann_pageId', (ann_pages as any).subscribe);
-app.post('/ann_pages/addAuthors/:ann_pageId', (ann_pages as any).addAuthors);
+app.post('/ann_pages/subscribe/:ann_pageId', requireAuth, (ann_pages as any).subscribe);
+app.post('/ann_pages/addAuthors/:ann_pageId', requireAuth, (ann_pages as any).addAuthors);
 app.get('/ann_pages/:ann_pageId/notes', (ann_pages as any).findNotes);
 app.put('/ann_pages/:ann_pageId', requireAuth, (ann_pages as any).update);
 app.delete('/ann_pages/:ann_pageId', requireAuth, (ann_pages as any).delete);

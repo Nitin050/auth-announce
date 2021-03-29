@@ -96,10 +96,15 @@ exports.findOne = async(req:any, res:any) => {
         });
     }
 
-    if((ann_page as any).visibility === 'private'){
-        if(!(req.currentUser!.email in (ann_page as any).subscribers)){
+    if((ann_page as any)[0].visibility === 'private'){
+        if(!(req.currentUser)){
             return res.status(404).send({
-                errors: [{ message:  "not authorized to view this ann_page" }]
+                errors: [{ message:  "not authorized to view this page" }]
+            });
+        }
+        if(!((ann_page as any)[0].subscribers).includes(req.currentUser!.email)){
+            return res.status(404).send({
+                errors: [{ message:  "not authorized to view this page" }]
             });
         }
     }
@@ -117,14 +122,14 @@ exports.subscribe = async(req:any, res:any) => {
     
     if(!ann_page) {
         return res.status(200).send({
-            message: "ann_page not found with id " + req.params.ann_pageId
+            errors: [{ message:  "ann_page not found with id " + req.params.ann_pageId }]
         });
     }
 
     if((ann_page as any).visibility === 'private'){
         if(req.currentUser!.email !== (ann_page as any).userEmail){
             return res.status(200).send({
-                message: "not authorized to let others subscribe this ann_page"
+                errors: [{ message:  "not authorized to let others subscribe this ann_page" }]
             }); 
         }
     }
@@ -141,21 +146,20 @@ exports.subscribe = async(req:any, res:any) => {
 
 // add authors to ann_page with emails
 exports.addAuthors = async(req:any, res:any) => {
-    // find and update ann_page
     
-
+    // find and update ann_page
     const ann_page = await AnnouncementPage.findById(req.params.ann_pageId);
     
     if(!ann_page) {
         return res.status(200).send({
-            message: "ann_page not found with id " + req.params.ann_pageId
+            errors: [{ message:  "ann_page not found with id " + req.params.ann_pageId }]
         });
     }
 
     if(req.currentUser!.email !== (ann_page as any).userEmail){
         return res.status(200).send({
-            message: "not authorized to add others as authors to this ann_page"
-        }); 
+            errors: [{ message:  "not authorized to add others as authors to this ann_page" }]
+        });
     }
 
     for (var email in req.body.emails){
